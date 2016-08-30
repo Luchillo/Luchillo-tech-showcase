@@ -5,7 +5,7 @@
 This repo holds an Angular 2 SPA that showcase multiple technologies I have played with, it features amazing programming methodologies, some still in development, listed as the following:
 
 - [x] MVC
-- [ ] DRY
+- [x] DRY
 - [ ] Testing (BDD-TDD)
 - [x] App shell (is the home page)
 - [x] Lazy loading modules (probably needs SystemJS)
@@ -15,9 +15,9 @@ This repo holds an Angular 2 SPA that showcase multiple technologies I have play
 - [x] Webpack dev server
 - [x] HRM (Hot Module Replacement)
 - [ ] Angular Universal?
-- [-] Installable (Web app manifest)
+- [ ] Installable (Web app manifest)
   - [x] Android
-  - [-] IOS partial, Safari uses the meta tags, relate to: [Safari metatags](https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html), [Safari application short name](http://stackoverflow.com/questions/3400741/setting-home-screen-icon-name-for-mobile-safari)
+  - [ ] IOS partial, Safari uses the meta tags, relate to: [Safari metatags](https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html), [Safari application short name](http://stackoverflow.com/questions/3400741/setting-home-screen-icon-name-for-mobile-safari)
 - [ ] Static template compilation (wait until Ng2 rc5 release for fix to: [#876](https://github.com/mgechev/angular2-seed/pull/876), [#9540](https://github.com/angular/angular/issues/9540), [#9645](https://github.com/angular/angular/issues/9645))
 
 ## Technologies list
