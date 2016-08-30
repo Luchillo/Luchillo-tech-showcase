@@ -156,6 +156,45 @@ module.exports = {
         loaders: ['to-string-loader', 'css-loader']
       },
 
+      /**
+      * Scss loader support for *.scss files.
+      *
+      * See: https://github.com/jtangelder/sass-loader
+      */
+      {
+        test: /\.scss$/,
+        loaders: [
+          // ExtractTextPlugin.extract("style", "css?sourceMap"),
+          'to-string-loader',
+          'css-loader',
+          'resolve-url-loader',
+          'sass-loader' +
+          '?sourceMap&' +
+          'outputStyle=expanded&' +
+          'root=' + helpers.root('src') + '&' +
+          '&includePaths[]' + helpers.root('node_modules') + '&' +
+          '&includePaths[]' + helpers.root('src')
+        ],
+        exclude: [
+          /app\.core\.scss/
+        ]
+      },
+      {
+        test: /\.scss$/,
+        loaders: [
+          'style-loader',
+          'css-loader',
+          'resolve-url-loader',
+          'sass-loader' +
+          '?sourceMap&' +
+          'outputStyle=expanded&' +
+          'root='+helpers.root('src')+'&' +
+          '&includePaths[]'+helpers.root('node_modules') + '&' +
+          '&includePaths[]'+helpers.root('src')
+        ]
+        ,include: /app.core.scss/
+      },
+
       /* Raw loader support for *.html
        * Returns file content as string
        *
@@ -167,11 +206,29 @@ module.exports = {
         exclude: [helpers.root('src/index.html')]
       },
 
-      /* File loader for supporting images, for example, in CSS files.
+      /**
+      * Url loader support for png|jpg|gif
+      *
+      * See: https://www.npmjs.com/package/url-loader
       */
       {
-        test: /\.(jpg|png|gif)$/,
-        loader: 'file'
+        test: /\.(png|jpg|gif)$/,
+        loader: "url?limit=50000&name=[path][name].[ext]"
+      },
+
+      /**
+       * Font loader support for fonts necesary for FontAwesome
+       * Fonts handled by next 2 loaders are ttf|eot|otf|svg|woff|woff2
+       *
+       * See: https://www.npmjs.com/package/url-loader
+       */
+      {
+        test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url-loader?limit=10000&name=fonts/[name].[ext]"
+      },
+      {
+        test: /\.(ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file-loader?name=fonts/[name].[ext]"
       }
     ]
 
