@@ -48,6 +48,7 @@ import '../theme/app.core.scss';
       <router-outlet></router-outlet>
     </main>
 
+    <!--
     <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
 
     <footer>
@@ -58,6 +59,7 @@ import '../theme/app.core.scss';
         </a>
       </div>
     </footer>
+    -->
   `
 })
 export class App {

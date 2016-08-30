@@ -73,7 +73,7 @@ module.exports = {
      *
      * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
      */
-    extensions: ['', '.ts', '.js', '.json'],
+    extensions: ['', '.ts', '.js', '.json', '.md'],
 
     // Make sure root is src
     root: helpers.root('src'),
@@ -201,7 +201,7 @@ module.exports = {
        * See: https://github.com/webpack/raw-loader
        */
       {
-        test: /\.html$/,
+        test: /\.(html|md)$/,
         loader: 'raw-loader',
         exclude: [helpers.root('src/index.html')]
       },

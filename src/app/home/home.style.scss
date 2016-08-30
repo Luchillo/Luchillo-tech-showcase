@@ -1,0 +1,11 @@
+/*styles for home content only*/
+:host {
+  position: relative;
+  .card-container {
+    top:  0;
+    left: 50%;
+    position:  relative;
+    max-width: 800px;
+    transform: translateX(-50%);
+  }
+}

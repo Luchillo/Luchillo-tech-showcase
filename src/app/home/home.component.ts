@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { MDService } from '../shared';
 
 import { AppState } from '../app.service';
-import { Title } from './title';
-import { XLarge } from './x-large';
+// import { Title } from './title';
+// import { XLarge } from './x-large';
 
+import * as README from '../../../README';
 @Component({
   // The selector is what angular internally uses
   // for `document.querySelectorAll(selector)` in our index.html
@@ -19,7 +21,7 @@ import { XLarge } from './x-large';
   // We need to tell Angular's compiler which custom pipes are in our template.
   pipes: [ ],
   // Our list of styles in our component. We may add more to compose many styles together
-  styleUrls: [ './home.style.css' ],
+  styleUrls: [ './home.style.scss' ],
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   templateUrl: './home.template.html'
 })
@@ -27,8 +29,10 @@ export class Home {
   // Set our default values
   localState = { value: '' };
   // TypeScript public modifiers
-  constructor(public appState: AppState) {
-
+  public readme: string = '';
+  constructor(public appState: AppState, mdService: MDService) {
+    this.readme = mdService.makeHtml(README);
+    console.log('README: ', this.readme);
   }
 
   ngOnInit() {

@@ -17,11 +17,13 @@ import { AppState } from './app.service';
 import { Home } from './home';
 import { About } from './about';
 import { NoContent } from './no-content';
+import { MDService } from './shared';
 
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  MDService
 ];
 
 /**
