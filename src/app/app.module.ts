@@ -35,7 +35,8 @@ const APP_PROVIDERS = [
     App,
     About,
     Home,
-    NoContent
+    NoContent,
+    XLarge
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -58,9 +59,9 @@ export class AppModule {
     delete store.state;
   }
   hmrOnDestroy(store) {
-    let cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
+    const cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
     // recreate elements
-    let state = this.appState._state;
+    const state = this.appState._state;
     store.state = state;
     store.disposeOldHosts = createNewHosts(cmpLocation);
     // remove styles
