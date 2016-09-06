@@ -2,6 +2,7 @@
  * Angular 2 decorators and services
  */
 import { Component, ViewEncapsulation } from '@angular/core';
+import { MenuItem } from 'primeng/primeng';
 
 import { AppState } from './app.service';
 
@@ -18,6 +19,8 @@ import '../theme/app.core.scss';
     './app.style.scss'
   ],
   template: `
+    <!-- <p-menu [model]="routes"></p-menu> -->
+
     <nav>
       <span>
         <a [routerLink]=" ['./'] ">
@@ -28,6 +31,12 @@ import '../theme/app.core.scss';
       <span>
         <a [routerLink]=" ['./home'] ">
           Home
+        </a>
+      </span>
+      |
+      <span>
+        <a [routerLink]=" ['./graphics'] ">
+          Graphics
         </a>
       </span>
       |
@@ -66,6 +75,16 @@ export class App {
   angularclassLogo = 'assets/img/angularclass-avatar.png';
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
+
+  public routes: MenuItem[] = [
+    {
+      label: 'Home',
+      routerLink: './home'
+    }, {
+      label: 'Graphics',
+      routerLink: './graphics'
+    }
+  ];
 
   constructor(
     public appState: AppState) {

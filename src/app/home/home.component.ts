@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
+
 import { MDService } from '../shared';
 
 import { AppState } from '../app.service';
@@ -23,7 +25,7 @@ export class Home {
   // Set our default values
   localState = { value: '' };
   // TypeScript public modifiers
-  public readme: string = '';
+  public readme: SafeHtml;
   constructor(public appState: AppState, mdService: MDService) {
     this.readme = mdService.makeHtml(README);
     console.log('README: ', this.readme);
