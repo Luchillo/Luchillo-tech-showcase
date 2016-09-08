@@ -21,8 +21,8 @@ import '@angularclass/hmr';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
-// Font awesome webpack
-require('font-awesome-webpack2');
+// Font Awesome for webpack
+import 'font-awesome-webpack2';
 
 // Offline-plugin webpack
 require('offline-plugin/runtime').install();

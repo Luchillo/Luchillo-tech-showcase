@@ -14,6 +14,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 const HtmlElementsPlugin = require('./html-elements-plugin');
 const OfflinePlugin = require('offline-plugin');
+const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
+
 
 /*
  * Webpack Constants
@@ -314,7 +316,23 @@ module.exports = {
       headTags: require('./head-config.common')
     }),
 
+    new WebpackBuildNotifierPlugin({
+      title: 'TAO WEB',
+      logo: 'public/dist/img/favicon.ico'
+    })
   ],
+
+  /**
+   * Config sassLoader paths for imports from node_modules, bower components
+   * and app folder.
+   *
+   * See: https://github.com/jtangelder/sass-loader
+   */
+  sassLoader: {
+    includePaths: [
+      'node_modules', 'bower_components', 'src', '.'
+    ]
+  },
 
   /*
    * Include polyfills or mocks for various node stuff
