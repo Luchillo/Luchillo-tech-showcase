@@ -1,5 +1,3 @@
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -24,8 +22,6 @@ export const routes: Routes = [
     WebSql
   ],
   imports: [
-    CommonModule,
-    FormsModule,
     RouterModule.forChild(routes),
   ]
 })

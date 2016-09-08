@@ -1,4 +1,4 @@
-# Luchillo tech showcase
+# Luchillo's tech showcase
 
 ## Introduction
 

@@ -28,7 +28,7 @@ export class Home {
   public readme: SafeHtml;
   constructor(public appState: AppState, mdService: MDService) {
     this.readme = mdService.makeHtml(README);
-    console.log('README: ', this.readme);
+    // console.log('README: ', this.readme);
   }
 
   ngOnInit() {

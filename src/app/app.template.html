@@ -1,0 +1,16 @@
+<l-toolbar (toggleMenuEvent)="isMenuOpen = $event" (toggleMenuEvent)="toggleMenu($event)"></l-toolbar>
+
+<div class="app-container">
+
+  <div [@animMenuRight]='isMenuOpen' class="sidemenu">
+    <p-slideMenu [model]="routes"></p-slideMenu>
+  </div>
+  <div class="main-content">
+
+
+    <router-outlet></router-outlet>
+
+    <!--<l-menu-overlay></l-menu-overlay>-->
+
+  </div>
+</div>

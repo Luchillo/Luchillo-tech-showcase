@@ -1,9 +1,25 @@
+
 html, body{
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
   background: #eee;
 }
 
-span:nth-child(1) {
-  background-color: gray;
+.app-container {
+  display: flex;
 }
+
+.sidemenu {
+  p-slidemenu > div {
+    height: 100vh;
+  }
+}
+
+.main-content {
+  padding: 10px;
+  flex: 1 1 auto;
+}
+
+// span:nth-child(1) {
+//   background-color: gray;
+// }

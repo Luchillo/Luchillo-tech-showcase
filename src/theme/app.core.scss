@@ -1,2 +1,9 @@
-@import '~primeui/themes/omega/theme';
+@import '~primeui/themes/afterdark/theme';
 @import '~primeui/primeui-ng-all.min';
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: absolute;
+}

@@ -1,0 +1,19 @@
+:host {
+  width: 100%;
+  color: #eee;
+  display: block;
+  position: relative;
+  background: #333;
+
+  .bars-icon {
+    padding: 10px;
+  }
+
+  div {
+    display: inline-block;
+
+    &:nth-child(2) {
+
+    }
+  }
+}

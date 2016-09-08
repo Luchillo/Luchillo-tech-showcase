@@ -2,8 +2,9 @@
 :host {
   position: relative;
   .card-container {
-    top:  0;
-    left: 50%;
+    top:       0;
+    left:      50%;
+    padding:   0 10px;
     position:  relative;
     max-width: 800px;
     transform: translateX(-50%);

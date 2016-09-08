@@ -1,11 +1,6 @@
 import { NgModule, ApplicationRef } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
-
-// import { SlideMenuModule } from 'primeng/primeng';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -22,7 +17,7 @@ import { NoContent } from './no-content';
 
 
 
-import { MDService } from './shared';
+import { SharedModule, MDService } from './shared';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -43,11 +38,8 @@ const APP_PROVIDERS = [
     NoContent
   ],
   imports: [ // import Angular's modules
-    BrowserModule,
-    FormsModule,
-    HttpModule,
+    SharedModule,
     RouterModule.forRoot(ROUTES, { useHash: true })
-    // SlideMenuModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
