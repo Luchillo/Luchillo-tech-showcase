@@ -18,7 +18,6 @@ const OfflinePlugin = require('offline-plugin');
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
-
 /*
  * Webpack Constants
  */
@@ -35,7 +34,7 @@ const METADATA = {
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = function(options) {
-  isProd = options.env === 'production';
+  const isProd = options.env === 'production';
   return {
 
     /*
@@ -45,14 +44,14 @@ module.exports = function(options) {
      */
     metadata: METADATA,
 
-    /*
-     * Cache generated modules and chunks to improve performance for multiple incremental builds.
-     * This is enabled by default in watch mode.
-     * You can pass false to disable it.
-     *
-     * See: http://webpack.github.io/docs/configuration.html#cache
-     */
-     //cache: false,
+  /*
+   * Cache generated modules and chunks to improve performance for multiple incremental builds.
+   * This is enabled by default in watch mode.
+   * You can pass false to disable it.
+   *
+   * See: http://webpack.github.io/docs/configuration.html#cache
+   */
+   // cache: false,
 
     /*
      * The entry point for the bundle
@@ -73,20 +72,20 @@ module.exports = function(options) {
      *
      * See: http://webpack.github.io/docs/configuration.html#resolve
      */
-    extensions: ['', '.ts', '.js', '.json', '.md'],
+    resolve: {
 
       /*
        * An array of extensions that should be used to resolve modules.
        *
        * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
        */
-      extensions: ['', '.ts', '.js', '.json'],
+    extensions: ['', '.ts', '.js', '.json', '.md'],
 
       // Make sure root is src
       root: helpers.root('src'),
 
       // remove other default values
-      modulesDirectories: ['node_modules'],
+      modulesDirectories: ['node_modules']
 
     },
 
@@ -112,7 +111,7 @@ module.exports = function(options) {
             flags: 'g'
           },
           include: [helpers.root('src')]
-        },
+      }
 
       ],
 
@@ -169,7 +168,7 @@ module.exports = function(options) {
          * See: https://github.com/webpack/raw-loader
          */
         {
-          test: /\.html$/,
+          test: /\.(html|md)$/,
           loader: 'raw-loader',
           exclude: [helpers.root('src/index.html')]
         },
@@ -179,6 +178,68 @@ module.exports = function(options) {
         {
           test: /\.(jpg|png|gif)$/,
           loader: 'file'
+        },
+        /**
+        * Scss loader support for *.scss files.
+        *
+        * See: https://github.com/jtangelder/sass-loader
+        */
+        {
+          test: /\.scss$/,
+          loaders: [
+            // ExtractTextPlugin.extract("style", "css?sourceMap"),
+            'to-string-loader',
+            'css-loader',
+            'resolve-url-loader',
+            'sass-loader' +
+            '?sourceMap&' +
+            'outputStyle=expanded&' +
+            'root=' + helpers.root('src') + '&' +
+            '&includePaths[]' + helpers.root('node_modules') + '&' +
+            '&includePaths[]' + helpers.root('src')
+          ],
+          exclude: [
+            /app\.core\.scss/
+          ]
+        },
+        {
+          test: /\.scss$/,
+          loaders: [
+            'style-loader',
+            'css-loader',
+            'resolve-url-loader',
+            'sass-loader' +
+            '?sourceMap&' +
+            'outputStyle=expanded&' +
+            'root=' + helpers.root('src') + '&' +
+            '&includePaths[]' + helpers.root('node_modules') + '&' +
+            '&includePaths[]' + helpers.root('src')
+          ],
+          include: /app.core.scss/
+        },
+        /**
+        * Url loader support for png|jpg|gif
+        *
+        * See: https://www.npmjs.com/package/url-loader
+        */
+        {
+          test: /\.(png|jpg|gif)$/,
+          loader: "url?limit=50000&name=[path][name].[ext]"
+        },
+
+        /**
+         * Font loader support for fonts necesary for FontAwesome
+         * Fonts handled by next 2 loaders are ttf|eot|otf|svg|woff|woff2
+         *
+         * See: https://www.npmjs.com/package/url-loader
+         */
+        {
+          test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
+          loader: "url-loader?limit=10000&name=fonts/[name].[ext]"
+        },
+        {
+          test: /\.(ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          loader: "file-loader?name=fonts/[name].[ext]"
         }
       ],
 
@@ -252,47 +313,9 @@ module.exports = function(options) {
         chunksSortMode: 'dependency'
       }),
 
-      /**
-      * Scss loader support for *.scss files.
-      *
-      * See: https://github.com/jtangelder/sass-loader
-      */
-      {
-        test: /\.scss$/,
-        loaders: [
-          // ExtractTextPlugin.extract("style", "css?sourceMap"),
-          'to-string-loader',
-          'css-loader',
-          'resolve-url-loader',
-          'sass-loader' +
-          '?sourceMap&' +
-          'outputStyle=expanded&' +
-          'root=' + helpers.root('src') + '&' +
-          '&includePaths[]' + helpers.root('node_modules') + '&' +
-          '&includePaths[]' + helpers.root('src')
-        ],
-        exclude: [
-          /app\.core\.scss/
-        ]
-      },
-      {
-        test: /\.scss$/,
-        loaders: [
-          'style-loader',
-          'css-loader',
-          'resolve-url-loader',
-          'sass-loader' +
-          '?sourceMap&' +
-          'outputStyle=expanded&' +
-          'root='+helpers.root('src')+'&' +
-          '&includePaths[]'+helpers.root('node_modules') + '&' +
-          '&includePaths[]'+helpers.root('src')
-        ]
-        ,include: /app.core.scss/
-      },
-
-      /* Raw loader support for *.html
-       * Returns file content as string
+      /*
+       * Plugin: HtmlHeadConfigPlugin
+       * Description: Generate html tags based on javascript maps.
        *
        * If a publicPath is set in the webpack output configuration, it will be automatically added to
        * href attributes, you can disable that by adding a "=href": false property.
@@ -312,44 +335,31 @@ module.exports = function(options) {
        *
        * Dependencies: HtmlWebpackPlugin
        */
-      {
-        test: /\.(html|md)$/,
-        loader: 'raw-loader',
-        exclude: [helpers.root('src/index.html')]
-      },
       new HtmlElementsPlugin({
         headTags: require('./head-config.common')
       }),
 
-      /**
-      * Url loader support for png|jpg|gif
-      *
-      * See: https://www.npmjs.com/package/url-loader
-      */
-      {
-        test: /\.(png|jpg|gif)$/,
-        loader: "url?limit=50000&name=[path][name].[ext]"
-      },
-
-      /**
-       * Font loader support for fonts necesary for FontAwesome
-       * Fonts handled by next 2 loaders are ttf|eot|otf|svg|woff|woff2
-       *
-       * See: https://www.npmjs.com/package/url-loader
-       */
-      {
-        test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url-loader?limit=10000&name=fonts/[name].[ext]"
-      },
-      {
-        test: /\.(ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "file-loader?name=fonts/[name].[ext]"
-      }
-    ]
       new OfflinePlugin(),
 
-      new DashboardPlugin()
+      new DashboardPlugin(),
+
+      new WebpackBuildNotifierPlugin({
+        title: 'TAO WEB',
+        logo: 'public/dist/img/favicon.ico'
+      })
     ],
+
+    /**
+     * Config sassLoader paths for imports from node_modules, bower components
+     * and app folder.
+     *
+     * See: https://github.com/jtangelder/sass-loader
+     */
+    sassLoader: {
+      includePaths: [
+        'node_modules', 'bower_components', 'src', '.'
+      ]
+    },
 
     /*
      * Include polyfills or mocks for various node stuff
@@ -367,80 +377,4 @@ module.exports = function(options) {
     }
 
   };
-}
-
-    /*
-     * Plugin: HtmlWebpackPlugin
-     * Description: Simplifies creation of HTML files to serve your webpack bundles.
-     * This is especially useful for webpack bundles that include a hash in the filename
-     * which changes every compilation.
-     *
-     * See: https://github.com/ampedandwired/html-webpack-plugin
-     */
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      chunksSortMode: 'dependency'
-    }),
-
-    new OfflinePlugin(),
-
-    /*
-     * Plugin: HtmlHeadConfigPlugin
-     * Description: Generate html tags based on javascript maps.
-     *
-     * If a publicPath is set in the webpack output configuration, it will be automatically added to
-     * href attributes, you can disable that by adding a "=href": false property.
-     * You can also enable it to other attribute by settings "=attName": true.
-     *
-     * The configuration supplied is map between a location (key) and an element definition object (value)
-     * The location (key) is then exported to the template under then htmlElements property in webpack configuration.
-     *
-     * Example:
-     *  Adding this plugin configuration
-     *  new HtmlElementsPlugin({
-     *    headTags: { ... }
-     *  })
-     *
-     *  Means we can use it in the template like this:
-     *  <%= webpackConfig.htmlElements.headTags %>
-     *
-     * Dependencies: HtmlWebpackPlugin
-     */
-    new HtmlElementsPlugin({
-      headTags: require('./head-config.common')
-    }),
-
-    new WebpackBuildNotifierPlugin({
-      title: 'TAO WEB',
-      logo: 'public/dist/img/favicon.ico'
-    })
-  ],
-
-  /**
-   * Config sassLoader paths for imports from node_modules, bower components
-   * and app folder.
-   *
-   * See: https://github.com/jtangelder/sass-loader
-   */
-  sassLoader: {
-    includePaths: [
-      'node_modules', 'bower_components', 'src', '.'
-    ]
-  },
-
-  /*
-   * Include polyfills or mocks for various node stuff
-   * Description: Node configuration
-   *
-   * See: https://webpack.github.io/docs/configuration.html#node
-   */
-  node: {
-    global: 'window',
-    crypto: 'empty',
-    process: true,
-    module: false,
-    clearImmediate: false,
-    setImmediate: false
-  }
-
 };

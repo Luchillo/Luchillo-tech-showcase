@@ -10,8 +10,11 @@ html, body{
 }
 
 .sidemenu {
+  overflow: hidden;
+
   p-slidemenu > div {
     height: 100vh;
+    border-radius: 0;
   }
 }
 
