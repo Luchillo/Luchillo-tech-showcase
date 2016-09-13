@@ -44,14 +44,14 @@ module.exports = function(options) {
      */
     metadata: METADATA,
 
-  /*
-   * Cache generated modules and chunks to improve performance for multiple incremental builds.
-   * This is enabled by default in watch mode.
-   * You can pass false to disable it.
-   *
-   * See: http://webpack.github.io/docs/configuration.html#cache
-   */
-   // cache: false,
+    /*
+     * Cache generated modules and chunks to improve performance for multiple incremental builds.
+     * This is enabled by default in watch mode.
+     * You can pass false to disable it.
+     *
+     * See: http://webpack.github.io/docs/configuration.html#cache
+     */
+     // cache: false,
 
     /*
      * The entry point for the bundle
@@ -111,7 +111,7 @@ module.exports = function(options) {
             flags: 'g'
           },
           include: [helpers.root('src')]
-      }
+        }
 
       ],
 
