@@ -1,10 +1,11 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, ViewEncapsulation } from '@angular/core';
-import { Observable, Subscription } from 'Rxjs';
-import 'Rxjs/add/operator/debounceTime';
-import 'Rxjs/add/observable/fromEvent';
+import { Component, ViewEncapsulation, HostListener } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/observable/fromEvent';
 
 import { MenuItem } from 'primeng/primeng';
 
@@ -100,22 +101,19 @@ export class App {
       }]
   }];
 
-  private resizeSub:  Subscription;
+  private resizeSubject:      Subject<boolean> = new Subject();
+  private resizeSubscription: Subscription;
   private isMenuOpen: boolean = false;
+
+  @HostListener('window:resize')
+  public onWindowResize() {
+    this.resizeSubject.next(true);
+  }
 
   constructor(
     public appState: AppState
   ) {
-    // this.resizeSub = Observable.fromEvent(document, 'onresize')
-    // .debounceTime(250)
-    // .subscribe((event) => {
-    //   console.log('event: ', event);
-    //   this.toggleMenu(this.isMenuOpen);
-    // });
-
-    this.resizeSub = Observable.create((observer) => {
-      window.onresize = (event) => observer.next(event);
-    })
+    this.resizeSubscription = this.resizeSubject
     .debounceTime(250)
     .subscribe((event) => {
       this.toggleMenu(true);
@@ -126,7 +124,7 @@ export class App {
   }
 
   ngOnDestroy() {
-    this.resizeSub.unsubscribe();
+    this.resizeSubscription.unsubscribe();
   }
 
   toggleMenu(isOpen) {
