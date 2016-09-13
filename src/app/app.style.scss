@@ -10,6 +10,7 @@ html, body{
 }
 
 .sidemenu {
+  flex: 0 1 150px;
   overflow: hidden;
 
   p-slidemenu > div {

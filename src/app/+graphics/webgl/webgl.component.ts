@@ -4,19 +4,19 @@ import { AppState } from '../../app.service';
 
 import * as README from '../../../README';
 @Component({
-  selector: 'websql',
+  selector: 'webgl',
   providers: [
   ],
-  // styleUrls: [ './websql.style.scss' ],
-  templateUrl: './websql.template.html'
+  // styleUrls: [ './webgl.style.scss' ],
+  templateUrl: './webgl.template.html'
 })
-export class WebSql {
+export class WebGl {
   // Set our default values
   localState = { value: '' };
   constructor(public appState: AppState) {
   }
 
   ngOnInit() {
-    console.log('hello `websql` component');
+    console.log('hello `webgl` component');
   }
 }

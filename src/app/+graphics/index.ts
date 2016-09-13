@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { Graphics } from './graphics.component';
-import { WebSql } from './websql/websql.component';
+import { WebGl } from './webgl/webgl.component';
 
 console.log('`Graphics` bundle loaded asynchronously');
 // async components must be named routes for WebpackAsyncRoute
@@ -10,7 +10,8 @@ export const routes: Routes = [
   { path: '',
     component: Graphics,
     children: [
-      {path: '', component: WebSql}
+      {path: '', component: WebGl},
+      {path: 'webgl', component: WebGl}
     ]
   }
 ];
@@ -19,7 +20,7 @@ export const routes: Routes = [
   declarations: [
     // Components / Directives/ Pipes
     Graphics,
-    WebSql
+    WebGl
   ],
   imports: [
     RouterModule.forChild(routes),

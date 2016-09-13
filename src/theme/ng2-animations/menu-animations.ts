@@ -10,10 +10,10 @@ import {
 
 export var animMenuRight = trigger('animMenuRight', [
   state('true', style({
-    width: '0'
+    flex: '0 1 0px'
   })),
   state('false', style({
-    width: '*'
+    flex: '0 0 150px'
   })),
   transition('* => *', animate('250ms ease'))
 ]);

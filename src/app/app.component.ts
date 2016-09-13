@@ -2,6 +2,10 @@
  * Angular 2 decorators and services
  */
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Observable, Subscription } from 'Rxjs';
+import 'Rxjs/add/operator/debounceTime';
+import 'Rxjs/add/observable/fromEvent';
+
 import { MenuItem } from 'primeng/primeng';
 
 import { AppState } from './app.service';
@@ -80,31 +84,58 @@ export class App {
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
 
-  public routes: MenuItem[] = [
-    {
-      label: 'Home',
-      routerLink: ['home']
-    }, {
-      label: 'Graphics',
-      routerLink: ['graphics']
-    }
-  ];
 
+  public routes: MenuItem[] = [{
+    label: 'Home',
+    routerLink: ['home']
+  }, {
+    label: 'Graphics',
+    routerLink: ['graphics'],
+    items: [{
+        label: 'WebGl',
+        routerLink: ['graphics', 'webgl']
+      }, {
+        label: 'Three.js',
+        routerLink: ['graphics', 'three.js']
+      }]
+  }];
+
+  private resizeSub:  Subscription;
   private isMenuOpen: boolean = false;
 
   constructor(
-    public appState: AppState) {
+    public appState: AppState
+  ) {
+    // this.resizeSub = Observable.fromEvent(document, 'onresize')
+    // .debounceTime(250)
+    // .subscribe((event) => {
+    //   console.log('event: ', event);
+    //   this.toggleMenu(this.isMenuOpen);
+    // });
 
+    this.resizeSub = Observable.create((observer) => {
+      window.onresize = (event) => observer.next(event);
+    })
+    .debounceTime(250)
+    .subscribe((event) => {
+      this.toggleMenu(true);
+    });
   }
 
   ngOnInit() {
-    console.log('Initial App State', this.appState.state);
+  }
+
+  ngOnDestroy() {
+    this.resizeSub.unsubscribe();
   }
 
   toggleMenu(isOpen) {
-    setTimeout(() => {
-      console.log(this.isMenuOpen);
-    }, 500);
+    console.log('toggleMenu: ', isOpen, window.innerWidth);
+
+    if (window.innerWidth >= 1024) {
+      return this.isMenuOpen = false;
+    }
+    this.isMenuOpen = isOpen;
   }
 
 }

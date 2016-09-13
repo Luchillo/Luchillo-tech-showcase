@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { AppState } from '../../app.service';
 
@@ -20,17 +20,15 @@ import * as README from '../../../README';
   `
 })
 export class LToolbarComponent {
-  @Output() toggleMenuEvent: EventEmitter<boolean> = new EventEmitter();
+  @Input()  toggleMenuValue: boolean;
+  @Output() toggleMenuEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   // Set our default values
   localState = { value: '' };
-
-  private isMenuOpen: boolean = false;
 
   constructor(public appState: AppState) {
   }
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-    this.toggleMenuEvent.next(this.isMenuOpen);
+    this.toggleMenuEvent.next(!this.toggleMenuValue);
   }
 }
