@@ -17,6 +17,7 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 const DashboardPlugin = require('webpack-dashboard/plugin');
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin'); 
 
 /*
  * Webpack Constants
@@ -81,11 +82,8 @@ module.exports = function(options) {
        */
       extensions: ['', '.ts', '.js', '.json', '.md'],
 
-      // Make sure root is src
-      root: helpers.root('src'),
-
-      // remove other default values
-      modulesDirectories: ['node_modules']
+      // An array of directory names to be resolved to the current directory
+      modules: [helpers.root('src'), 'node_modules'],
 
     },
 
@@ -286,6 +284,19 @@ module.exports = function(options) {
       new webpack.optimize.CommonsChunkPlugin({
         name: ['polyfills', 'vendor'].reverse()
       }),
+
+      /**
+       * Plugin: ContextReplacementPlugin
+       * Description: Provides context to Angular's use of System.import
+       * 
+       * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
+       * See: https://github.com/angular/angular/issues/11580
+       */
+      new ContextReplacementPlugin(
+        // The (\\|\/) piece accounts for path separators in *nix and Windows
+        /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+        helpers.root('src') // location of your src
+      ),
 
       /*
        * Plugin: CopyWebpackPlugin
