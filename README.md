@@ -2,7 +2,11 @@
 
 ## Introduction
 
-This repo holds an Angular 2 SPA that showcase multiple technologies I have played with, it features amazing programming methodologies, some still in development, listed as the following:
+This repo holds an Angular 2 SPA that showcase multiple technologies I have played with, it features amazing programming methodologies, some still in development.
+
+## Development feature list
+
+This list what features are planned for this repo and which ones are already implemented, this list is updated as fast as the related feature is developed.
 
 - [x] MVC
 - [x] DRY
@@ -20,7 +24,7 @@ This repo holds an Angular 2 SPA that showcase multiple technologies I have play
   - [ ] IOS partial, Safari uses the meta tags, relate to: [Safari metatags](https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html), [Safari application short name](http://stackoverflow.com/questions/3400741/setting-home-screen-icon-name-for-mobile-safari)
 - [ ] Static template compilation (wait until Ng2 rc5 release for fix to: [#876](https://github.com/mgechev/angular2-seed/pull/876), [#9540](https://github.com/angular/angular/issues/9540), [#9645](https://github.com/angular/angular/issues/9645))
 
-## Technologies list
+## Technology features list
 
 The following list is a WIP, meaning the ones checked are ready to show while the ones not checked are pending or are Work In Progress:
 
@@ -30,3 +34,7 @@ The following list is a WIP, meaning the ones checked are ready to show while th
   - [ ] Paper.js
   - [ ] Sketch.js
   - [ ] Unity3D
+
+## License
+
+MIT
