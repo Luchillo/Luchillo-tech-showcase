@@ -4,8 +4,9 @@ import { AppState } from '../app.service';
 
 @Component({
   selector: 'graphics',
-  providers: [
-  ],
+  host: {
+    class: 'flex-fill-bottom'
+  },
   styleUrls: [ './graphics.style.scss' ],
   templateUrl: './graphics.template.html'
 })

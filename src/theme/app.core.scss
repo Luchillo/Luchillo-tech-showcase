@@ -1,9 +1,19 @@
 @import '~primeui/themes/afterdark/theme';
 @import '~primeui/primeui-ng-all.min';
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     width: 100%;
     height: 100%;
     margin: 0;
     position: absolute;
+}
+
+.flex-fill-bottom {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
 }

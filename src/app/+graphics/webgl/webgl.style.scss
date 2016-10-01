@@ -1,6 +1,10 @@
 :host {
-  canvas {
-    width: 100%;
 
+  #webgl-header {
+    border: 1px solid rgba(0, 0, 0, 0);
+  }
+  canvas {
+    flex: 1;
+    // width: 100%;
   }
 }

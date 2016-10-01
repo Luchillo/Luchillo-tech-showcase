@@ -17,7 +17,7 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 const DashboardPlugin = require('webpack-dashboard/plugin');
-const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin'); 
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 
 /*
  * Webpack Constants
@@ -238,6 +238,15 @@ module.exports = function(options) {
         {
           test: /\.(ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
           loader: "file-loader?name=fonts/[name].[ext]"
+        },
+        /**
+         * Glsl loader suport for WebGl shaders, imports result in string values
+         *
+         * See: https://github.com/grieve/webpack-glsl-loader
+         */
+        {
+          test: /\.glsl$/,
+          loader: 'webpack-glsl'
         }
       ],
 
@@ -288,7 +297,7 @@ module.exports = function(options) {
       /**
        * Plugin: ContextReplacementPlugin
        * Description: Provides context to Angular's use of System.import
-       * 
+       *
        * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
        * See: https://github.com/angular/angular/issues/11580
        */
