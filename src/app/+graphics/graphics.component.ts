@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { AppState } from '../app.service';
 
-import * as README from '../../../README';
 @Component({
   selector: 'graphics',
   providers: [
