@@ -2,8 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 
 import { AppState } from '../../app.service';
 
-import * as vertexShader from '../shaders/vertex-shader.glsl';
-import * as fragmentShader from '../shaders/fragment-shader.glsl';
+import { vertexShader, fragmentShader } from '../shaders';
 
 @Component({
   selector: 'webgl',
