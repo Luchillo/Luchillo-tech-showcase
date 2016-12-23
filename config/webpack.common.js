@@ -77,7 +77,7 @@ module.exports = function (options) {
        *
        * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
        */
-      extensions: ['.ts', '.js', '.json'],
+      extensions: ['.ts', '.js', '.json', '.md'],
 
       // An array of directory names to be resolved to the current directory
       modules: [helpers.root('src'), helpers.root('node_modules')],
@@ -155,17 +155,23 @@ module.exports = function (options) {
         */
         {
           test: /\.scss$/,
-          loaders: [
+          use: [
             // ExtractTextPlugin.extract("style", "css?sourceMap"),
             'to-string-loader',
             'css-loader',
             'resolve-url-loader',
-            'sass-loader' +
-            '?sourceMap&' +
-            'outputStyle=expanded&' +
-            'root=' + helpers.root('src') + '&' +
-            '&includePaths[]' + helpers.root('node_modules') + '&' +
-            '&includePaths[]' + helpers.root('src')
+            {
+              loader: 'sass-loader',
+              options: {
+                root: helpers.root('src'),
+                sourceMap: true,
+                outputStyle: 'expanded',
+                includePaths: [
+                  helpers.root('node_modules'),
+                  helpers.root('src'),
+                ]
+              },
+            }
           ],
           exclude: [
             /app\.core\.scss/
@@ -173,16 +179,22 @@ module.exports = function (options) {
         },
         {
           test: /\.scss$/,
-          loaders: [
+          use: [
             'style-loader',
             'css-loader',
             'resolve-url-loader',
-            'sass-loader' +
-            '?sourceMap&' +
-            'outputStyle=expanded&' +
-            'root=' + helpers.root('src') + '&' +
-            '&includePaths[]' + helpers.root('node_modules') + '&' +
-            '&includePaths[]' + helpers.root('src')
+            {
+              loader: 'sass-loader',
+              options: {
+                root: helpers.root('src'),
+                sourceMap: true,
+                outputStyle: 'expanded',
+                includePaths: [
+                  helpers.root('node_modules'),
+                  helpers.root('src'),
+                ]
+              },
+            }
           ],
           include: /app.core.scss/
         },
@@ -193,7 +205,7 @@ module.exports = function (options) {
         */
         {
           test: /\.(png|jpg|gif)$/,
-          loader: "url?limit=50000&name=[path][name].[ext]"
+          use: "url-loader?limit=50000&name=[path][name].[ext]"
         },
 
         /**
@@ -204,11 +216,11 @@ module.exports = function (options) {
          */
         {
           test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
-          loader: "url-loader?limit=10000&name=fonts/[name].[ext]"
+          use: "url-loader?limit=10000&name=fonts/[name].[ext]"
         },
         {
           test: /\.(ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
-          loader: "file-loader?name=fonts/[name].[ext]"
+          use: "file-loader?name=fonts/[name].[ext]"
         }
       ],
 
@@ -365,18 +377,6 @@ module.exports = function (options) {
         logo: 'public/dist/img/favicon.ico'
       })
     ],
-
-    /**
-     * Config sassLoader paths for imports from node_modules, bower components
-     * and app folder.
-     *
-     * See: https://github.com/jtangelder/sass-loader
-     */
-    sassLoader: {
-      includePaths: [
-        'node_modules', 'bower_components', 'src', '.'
-      ]
-    },
 
     /*
      * Include polyfills or mocks for various node stuff

@@ -74,15 +74,15 @@
     "@angularclass/hmr-loader": "~3.0.2",
     "assets-webpack-plugin": "^3.4.0",
     "core-js": "^2.4.1",
+    "font-awesome": "^4.6.3",
+    "font-awesome-webpack2": "0.0.6",
     "http-server": "^0.9.0",
     "ie-shim": "^0.1.0",
-    "rxjs": "5.0.0-beta.12",
-    "zone.js": "~0.6.26"
-    "font-awesome": "^4.6.3",
-    "font-awesome-webpack2": "0.0.5",
-    "primeng": "^1.0.0-beta.13",
+    "primeng": "^1.1.2",
     "primeui": "^4.1.15",
-    "showdown": "^1.4.3"
+    "rxjs": "5.0.0-beta.12",
+    "showdown": "^1.4.3",
+    "zone.js": "~0.6.26"
   },
   "devDependencies": {
     "@types/hammerjs": "^2.0.33",
@@ -117,7 +117,7 @@
     "karma-webpack": "1.8.0",
     "less": "^2.7.1",
     "node-sass": "^3.8.0",
-    "offline-plugin": "^3.4.2",
+    "offline-plugin": "^4.5.3",
     "parse5": "^2.2.2",
     "protractor": "^4.0.10",
     "raw-loader": "0.5.1",

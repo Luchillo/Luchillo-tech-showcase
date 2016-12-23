@@ -23,12 +23,12 @@ import '../theme/app.core.scss';
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
-    './app.style.scss'
+    './app.component.scss'
   ],
   animations: [
     animMenuRight
   ],
-  templateUrl: './app.template.html'
+  templateUrl: './app.component.html'
   // template: `
   //   <nav>
   //     <span>
