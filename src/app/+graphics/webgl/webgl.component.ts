@@ -62,15 +62,37 @@ export class WebGl {
 
 
   createVertices() {
-    let coords = this.webglContext.getAttribLocation(this.shaderProgram, 'coords');
-    this.webglContext.vertexAttrib3f(coords, 0, 0, 0);
+    let gl = this.webglContext;
+    let vertices = [
+        -0.9, -0.9, 0,
+         0.9, -0.9, 0,
+         0.0,  0.9, 0
+    ];
 
-    let pointSize = this.webglContext.getAttribLocation(this.shaderProgram, 'pointSize');
-    this.webglContext.vertexAttrib1f(pointSize, 100);
+    let buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array(vertices),
+      gl.STATIC_DRAW
+    );
+
+    let coords = gl.getAttribLocation(this.shaderProgram, 'coords');
+    // gl.vertexAttrib3f(coords, 0, 0, 0);
+    gl.vertexAttribPointer(coords, 3, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(coords);
+    gl.bindBuffer(gl.ARRAY_BUFFER, null);
+
+
+    let pointSize = gl.getAttribLocation(this.shaderProgram, 'pointSize');
+    gl.vertexAttrib1f(pointSize, 100);
+
+    let color = gl.getUniformLocation(this.shaderProgram, 'color');
+    gl.uniform4f(color, 0, 1, 0, 1);
   }
 
   draw() {
     this.webglContext.clear(this.webglContext.COLOR_BUFFER_BIT);
-    this.webglContext.drawArrays(this.webglContext.POINTS, 0, 1);
+    this.webglContext.drawArrays(this.webglContext.TRIANGLES, 0, 3);
   }
 }
