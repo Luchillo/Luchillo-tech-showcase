@@ -57,7 +57,10 @@ type StoreType = {
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS
-  ]
+  ],
+  entryComponents: [
+    HomeComponent,
+  ],
 })
 export class AppModule {
   constructor(public appRef: ApplicationRef, public appState: AppState) {}

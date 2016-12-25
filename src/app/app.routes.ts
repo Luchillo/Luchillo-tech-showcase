@@ -11,7 +11,10 @@ export const ROUTES: Routes = [
   { path: 'home',  component: HomeComponent },
   { path: 'about', component: AboutComponent },
 
-  { path: 'graphics', loadChildren: () => System.import('./+graphics') },
+  {
+    path: 'graphics', loadChildren: () => System.import('./+graphics')
+      .then((comp: any) => comp.default),
+  },
   {
     path: 'detail', loadChildren: () => System.import('./+detail')
       .then((comp: any) => comp.default),
