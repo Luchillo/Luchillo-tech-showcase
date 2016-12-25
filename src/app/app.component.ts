@@ -23,12 +23,12 @@ import '../theme/app.core.scss';
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
-    './app.style.scss'
+    './app.component.scss'
   ],
   animations: [
     animMenuRight
   ],
-  templateUrl: './app.template.html'
+  templateUrl: './app.component.html'
   // template: `
   //   <nav>
   //     <span>
@@ -80,7 +80,7 @@ import '../theme/app.core.scss';
   //   -->
   // `
 })
-export class App {
+export class AppComponent {
   angularclassLogo = 'assets/img/angularclass-avatar.png';
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
