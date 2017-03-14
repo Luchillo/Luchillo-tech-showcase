@@ -1,6 +1,9 @@
 /*
  * Angular 2 decorators and services
  */
+import {
+  OnInit,
+} from '@angular/core';
 import { Component, ViewEncapsulation, HostListener } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
@@ -80,10 +83,10 @@ import '../theme/app.core.scss';
   //   -->
   // `
 })
-export class AppComponent {
-  angularclassLogo = 'assets/img/angularclass-avatar.png';
-  name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
+export class AppComponent implements OnInit {
+  public angularclassLogo = 'assets/img/angularclass-avatar.png';
+  public name = 'Angular 2 Webpack Starter';
+  public url = 'https://twitter.com/AngularClass';
 
 
   public routes: MenuItem[] = [{

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 
 import { MDService } from '../shared';
@@ -21,9 +24,9 @@ import * as README from '../../../README';
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   templateUrl: './home.component.html'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   // Set our default values
-  localState = { value: '' };
+  public localState = { value: '' };
   // TypeScript public modifiers
   public readme: SafeHtml;
   constructor(public appState: AppState, mdService: MDService) {
@@ -31,12 +34,12 @@ export class HomeComponent {
     // console.log('README: ', this.readme);
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     console.log('hello `Home` component');
     // this.title.getData().subscribe(data => this.data = data);
   }
 
-  submitState(value: string) {
+  public submitState(value: string) {
     console.log('submitState', value);
     this.appState.set('value', value);
     this.localState.value = '';
