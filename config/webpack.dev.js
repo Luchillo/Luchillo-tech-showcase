@@ -115,18 +115,6 @@ module.exports = function (options) {
           use: ['style-loader', 'css-loader'],
           include: [helpers.root('src', 'styles')]
         },
-
-        /*
-         * sass loader support for *.scss files (styles directory only)
-         * Loads external sass styles into the DOM, supports HMR
-         *
-         */
-        {
-          test: /\.scss$/,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
-          include: [helpers.root('src', 'styles')]
-        },
-
       ]
 
     },

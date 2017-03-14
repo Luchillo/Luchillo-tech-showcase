@@ -20,15 +20,17 @@ import * as README from '../../../README';
   `
 })
 export class LToolbarComponent {
-  @Input()  toggleMenuValue: boolean;
-  @Output() toggleMenuEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input()
+  public toggleMenuValue: boolean;
+  @Output()
+  public toggleMenuEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   // Set our default values
-  localState = { value: '' };
+  public localState = { value: '' };
 
   constructor(public appState: AppState) {
   }
 
-  toggleMenu() {
+  public toggleMenu() {
     this.toggleMenuEvent.next(!this.toggleMenuValue);
   }
 }

@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { Graphics } from './graphics.component';
-import { WebGl } from './webgl/webgl.component';
+import { GraphicsComponent } from './graphics.component';
+import { WebGlComponent } from './webgl/webgl.component';
 
 console.log('`Graphics` bundle loaded asynchronously');
 // async components must be named routes for WebpackAsyncRoute
 export const routes: Routes = [
   { path: '',
-    component: Graphics,
+    component: GraphicsComponent,
     children: [
-      {path: '', component: WebGl},
-      {path: 'webgl', component: WebGl}
+      {path: '', component: WebGlComponent},
+      {path: 'webgl', component: WebGlComponent}
     ]
   }
 ];
@@ -19,13 +19,13 @@ export const routes: Routes = [
 @NgModule({
   declarations: [
     // Components / Directives/ Pipes
-    Graphics,
-    WebGl
+    GraphicsComponent,
+    WebGlComponent
   ],
   imports: [
     RouterModule.forChild(routes),
   ]
 })
-export default class AboutModule {
+export default class GraphicsModule {
   // static routes = routes;
 }

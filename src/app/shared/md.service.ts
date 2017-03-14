@@ -6,7 +6,7 @@ import * as showdown from 'showdown';
 export class MDService {
   private converter = new showdown.Converter({tasklists: true});
   constructor(private sanitizer: DomSanitizer) {}
-  makeHtml(text: string) {
+  public makeHtml(text: string) {
     return this.sanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(text));
   }
 }

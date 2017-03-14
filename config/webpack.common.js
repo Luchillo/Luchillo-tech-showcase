@@ -160,17 +160,6 @@ module.exports = function (options) {
           exclude: [helpers.root('src', 'styles')]
         },
 
-        /*
-         * to string and sass loader support for *.scss files (from Angular components)
-         * Returns compiled css content as string
-         *
-         */
-        {
-          test: /\.scss$/,
-          use: ['to-string-loader', 'css-loader', 'sass-loader'],
-          exclude: [helpers.root('src', 'styles')]
-        },
-
         /* Raw loader support for *.html
          * Returns file content as string
          *
@@ -182,7 +171,7 @@ module.exports = function (options) {
           exclude: [helpers.root('src/index.html')]
         },
 
-        /* 
+        /*
          * File loader for supporting images, for example, in CSS files.
          */
         {

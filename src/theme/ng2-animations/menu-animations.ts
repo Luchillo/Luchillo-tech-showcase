@@ -8,7 +8,7 @@ import {
   animate
 } from '@angular/core';
 
-export var animMenuRight = trigger('animMenuRight', [
+export const animMenuRight = trigger('animMenuRight', [
   state('true', style({
     flex: '0 1 0px'
   })),

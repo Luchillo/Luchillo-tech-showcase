@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 
 import { AppState } from '../../app.service';
 
@@ -10,13 +13,13 @@ import * as README from '../../../README';
   // styleUrls: [ './webgl.style.scss' ],
   templateUrl: './webgl.template.html'
 })
-export class WebGl {
+export class WebGlComponent implements OnInit {
   // Set our default values
-  localState = { value: '' };
+  public localState = { value: '' };
   constructor(public appState: AppState) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     console.log('hello `webgl` component');
   }
 }
