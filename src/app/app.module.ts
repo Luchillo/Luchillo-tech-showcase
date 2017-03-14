@@ -34,6 +34,10 @@ import { SharedModule, MDService } from './shared';
 import '../styles/styles.scss';
 import '../styles/headings.css';
 
+// Offline-plugin webpack
+import * as OfflinePlugin from 'offline-plugin/runtime';
+OfflinePlugin.install();
+
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
