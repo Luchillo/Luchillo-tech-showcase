@@ -1,1 +1,1 @@
-export * from './websql.component';
+export * from './webgl.component';

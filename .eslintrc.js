@@ -1,4 +1,5 @@
 module.exports = {
+  parser: "typescript-eslint-parser",
   extends: "google",
   rules: {
     'no-const-assign': 0,
@@ -10,5 +11,8 @@ module.exports = {
       'warn',
       120
     ]
-  }
+  },
+  env: {
+    "es6": true
+  },
 };
