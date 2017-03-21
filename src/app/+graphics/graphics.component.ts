@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 
 import { AppState } from '../app.service';
 
@@ -9,13 +12,13 @@ import { AppState } from '../app.service';
   styleUrls: [ './graphics.style.scss' ],
   templateUrl: './graphics.template.html'
 })
-export class Graphics {
+export class GraphicsComponent implements OnInit {
   // Set our default values
-  localState = { value: '' };
+  public localState = { value: '' };
   constructor(public appState: AppState) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     console.log('hello `Graphics` component');
   }
 }

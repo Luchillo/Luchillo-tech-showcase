@@ -19,7 +19,7 @@ export class WebGl {
   constructor(public appState: AppState) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     console.log('hello `webgl` component');
     this.canvas = this.canvasRef.nativeElement;
 

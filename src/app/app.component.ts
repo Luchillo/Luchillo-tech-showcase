@@ -1,7 +1,12 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, ViewEncapsulation, HostListener } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  HostListener,
+  OnDestroy,
+} from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
@@ -80,11 +85,10 @@ import '../theme/app.core.scss';
   //   -->
   // `
 })
-export class AppComponent {
-  angularclassLogo = 'assets/img/angularclass-avatar.png';
-  name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
-
+export class AppComponent implements OnDestroy {
+  public angularclassLogo = 'assets/img/angularclass-avatar.png';
+  public name = 'Angular 2 Webpack Starter';
+  public url = 'https://twitter.com/AngularClass';
 
   public routes: MenuItem[] = [{
     label: 'Home',
@@ -101,9 +105,10 @@ export class AppComponent {
       }]
   }];
 
+  public isMenuOpen: boolean = false;
+
   private resizeSubject:      Subject<boolean> = new Subject();
   private resizeSubscription: Subscription;
-  private isMenuOpen: boolean = false;
 
   @HostListener('window:resize')
   public onWindowResize() {
@@ -120,14 +125,11 @@ export class AppComponent {
     });
   }
 
-  ngOnInit() {
-  }
-
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.resizeSubscription.unsubscribe();
   }
 
-  toggleMenu(isOpen) {
+  public toggleMenu(isOpen) {
     console.log('toggleMenu: ', isOpen, window.innerWidth);
 
     if (window.innerWidth >= 1024) {
