@@ -10,7 +10,7 @@ import { AppState } from '../app.service';
   providers: [
   ],
   styleUrls: [ './graphics.style.scss' ],
-  templateUrl: './graphics.template.html'
+  templateUrl: './graphics.template.html',
 })
 export class GraphicsComponent implements OnInit {
   // Set our default values

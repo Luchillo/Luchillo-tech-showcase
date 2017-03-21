@@ -20,5 +20,5 @@ console.log('`Detail` bundle loaded asynchronously');
   ],
 })
 export class DetailModule {
-  public static routes = routes;
+  // public static routes = routes;
 }

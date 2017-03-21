@@ -1,3 +1,5 @@
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -20,12 +22,14 @@ export const routes: Routes = [
   declarations: [
     // Components / Directives/ Pipes
     GraphicsComponent,
-    WebGlComponent
+    WebGlComponent,
   ],
   imports: [
+    CommonModule,
+    FormsModule,
     RouterModule.forChild(routes),
   ]
 })
-export default class GraphicsModule {
+export class GraphicsModule {
   // static routes = routes;
 }

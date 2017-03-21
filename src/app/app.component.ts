@@ -33,57 +33,7 @@ import '../theme/app.core.scss';
   animations: [
     animMenuRight
   ],
-  templateUrl: './app.component.html'
-  // template: `
-  //   <nav>
-  //     <span>
-  //       <a [routerLink]=" ['./'] ">
-  //         Index
-  //       </a>
-  //     </span>
-  //     |
-  //     <span>
-  //       <a [routerLink]=" ['./home'] ">
-  //         Home
-  //       </a>
-  //     </span>
-  //     |
-  //     <span>
-  //       <a [routerLink]=" ['./graphics'] ">
-  //         Graphics
-  //       </a>
-  //     </span>
-  //     |
-  //     <span>
-  //       <a [routerLink]=" ['./detail'] ">
-  //         Detail
-  //       </a>
-  //     </span>
-  //     |
-  //     <span>
-  //       <a [routerLink]=" ['./about'] ">
-  //         About
-  //       </a>
-  //     </span>
-  //   </nav>
-
-  //   <main>
-  //     <router-outlet></router-outlet>
-  //   </main>
-
-  //   <!--
-  //   <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
-
-  //   <footer>
-  //     <span>WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a></span>
-  //     <div>
-  //       <a [href]="url">
-  //         <img [src]="angularclassLogo" width="25%">
-  //       </a>
-  //     </div>
-  //   </footer>
-  //   -->
-  // `
+  templateUrl: 'app.component.html',
 })
 export class AppComponent implements OnDestroy {
   public angularclassLogo = 'assets/img/angularclass-avatar.png';
@@ -92,17 +42,23 @@ export class AppComponent implements OnDestroy {
 
   public routes: MenuItem[] = [{
     label: 'Home',
-    routerLink: ['home']
+    routerLink: ['home'],
   }, {
     label: 'Graphics',
     routerLink: ['graphics'],
     items: [{
-        label: 'WebGl',
-        routerLink: ['graphics', 'webgl']
-      }, {
-        label: 'Three.js',
-        routerLink: ['graphics', 'three.js']
-      }]
+      label: 'WebGl',
+      routerLink: ['graphics', 'webgl'],
+    }, {
+      label: 'Three.js',
+      routerLink: ['graphics', 'three.js'],
+    }],
+  }, {
+    label: 'Detail',
+    routerLink: ['detail'],
+  }, {
+    label: 'Barrel',
+    routerLink: ['barrel'],
   }];
 
   public isMenuOpen: boolean = false;

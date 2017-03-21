@@ -2,7 +2,7 @@
  * @author: @AngularClass
  */
 
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const helpers = require('./helpers');
 
 /*
@@ -27,12 +27,12 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
 /*
  * Webpack Constants
  */
-const HMR = helpers.hasProcessFlag('hot');
+// const HMR = helpers.hasProcessFlag('hot');
 const AOT = helpers.hasNpmFlag('aot');
 const METADATA = {
   title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
   baseUrl: '/',
-  isDevServer: helpers.isWebpackDevServer()
+  isDevServer: helpers.isWebpackDevServer(),
 };
 
 /*
@@ -40,7 +40,7 @@ const METADATA = {
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = function (options) {
+module.exports = function(options) {
   isProd = options.env === 'production';
   return {
 
@@ -63,7 +63,7 @@ module.exports = function (options) {
 
       'polyfills': './src/polyfills.browser.ts',
       'main':      AOT ? './src/main.browser.aot.ts' :
-                  './src/main.browser.ts'
+                  './src/main.browser.ts',
 
     },
 
@@ -115,28 +115,31 @@ module.exports = function (options) {
               loader: '@angularclass/hmr-loader',
               options: {
                 pretty: !isProd,
-                prod: isProd
-              }
+                prod: isProd,
+              },
             },
             { // MAKE SURE TO CHAIN VANILLA JS CODE, I.E. TS COMPILATION OUTPUT.
               loader: 'ng-router-loader',
               options: {
                 loader: 'async-import',
                 genDir: 'compiled',
-                aot: AOT
-              }
+                aot: AOT,
+              },
             },
             {
               loader: 'awesome-typescript-loader',
               options: {
-                configFileName: 'tsconfig.webpack.json'
-              }
+                configFileName: 'tsconfig.webpack.json',
+              },
             },
             {
-              loader: 'angular2-template-loader'
-            }
+              loader: 'angular2-template-loader',
+              options: {
+                // keepUrl: true,
+              },
+            },
           ],
-          exclude: [/\.(spec|e2e)\.ts$/]
+          exclude: [/\.(spec|e2e)\.ts$/],
         },
 
         /*
@@ -146,7 +149,7 @@ module.exports = function (options) {
          */
         {
           test: /\.json$/,
-          use: 'json-loader'
+          use: 'json-loader',
         },
 
         /*
@@ -157,7 +160,7 @@ module.exports = function (options) {
         {
           test: /\.css$/,
           use: ['to-string-loader', 'css-loader'],
-          exclude: [helpers.root('src', 'styles')]
+          exclude: [helpers.root('src', 'styles')],
         },
 
         /* Raw loader support for *.html
@@ -168,7 +171,7 @@ module.exports = function (options) {
         {
           test: /\.(html|md)$/,
           use: 'raw-loader',
-          exclude: [helpers.root('src/index.html')]
+          exclude: [helpers.root('src/index.html')],
         },
 
         /*
@@ -176,7 +179,7 @@ module.exports = function (options) {
          */
         {
           test: /\.(jpg|png|gif)$/,
-          use: 'file-loader'
+          use: 'file-loader',
         },
         /**
         * Scss loader support for *.scss files.
@@ -199,13 +202,13 @@ module.exports = function (options) {
                 includePaths: [
                   helpers.root('node_modules'),
                   helpers.root('src'),
-                ]
+                ],
               },
-            }
+            },
           ],
           exclude: [
-            /app\.core\.scss/
-          ]
+            /app\.core\.scss/,
+          ],
         },
         {
           test: /\.scss$/,
@@ -222,11 +225,11 @@ module.exports = function (options) {
                 includePaths: [
                   helpers.root('node_modules'),
                   helpers.root('src'),
-                ]
+                ],
               },
-            }
+            },
           ],
-          include: /app.core.scss/
+          include: /app.core.scss/,
         },
         /**
         * Url loader support for png|jpg|gif
@@ -235,7 +238,7 @@ module.exports = function (options) {
         */
         {
           test: /\.(png|jpg|gif)$/,
-          use: "url-loader?limit=50000&name=[path][name].[ext]"
+          use: 'url-loader?limit=50000&name=[path][name].[ext]',
         },
 
         /**
@@ -246,12 +249,12 @@ module.exports = function (options) {
          */
         {
           test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
-          use: "url-loader?limit=10000&name=fonts/[name].[ext]"
+          use: 'url-loader?limit=10000&name=fonts/[name].[ext]',
         },
         {
           test: /\.(ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
-          use: "file-loader?name=fonts/[name].[ext]"
-        }
+          use: 'file-loader?name=fonts/[name].[ext]',
+        },
       ],
 
     },
@@ -265,7 +268,7 @@ module.exports = function (options) {
       new AssetsPlugin({
         path: helpers.root('dist'),
         filename: 'webpack-assets.json',
-        prettyPrint: true
+        prettyPrint: true,
       }),
 
       /*
@@ -285,17 +288,17 @@ module.exports = function (options) {
        */
       new CommonsChunkPlugin({
         name: 'polyfills',
-        chunks: ['polyfills']
+        chunks: ['polyfills'],
       }),
       // This enables tree shaking of the vendor modules
       new CommonsChunkPlugin({
         name: 'vendor',
         chunks: ['main'],
-        minChunks: module => /node_modules/.test(module.resource)
+        minChunks: (module) => /node_modules/.test(module.resource),
       }),
       // Specify the correct order the scripts will be injected in
       new CommonsChunkPlugin({
-        name: ['polyfills', 'vendor'].reverse()
+        name: ['polyfills', 'vendor'].reverse(),
       }),
 
       /**
@@ -324,7 +327,7 @@ module.exports = function (options) {
        */
       new CopyWebpackPlugin([
         { from: 'src/assets', to: 'assets' },
-        { from: 'src/meta'}
+        { from: 'src/meta'},
       ]),
 
 
@@ -341,7 +344,7 @@ module.exports = function (options) {
         title: METADATA.title,
         chunksSortMode: 'dependency',
         metadata: METADATA,
-        inject: 'head'
+        inject: 'head',
       }),
 
       /*
@@ -352,7 +355,7 @@ module.exports = function (options) {
        * See: https://github.com/numical/script-ext-html-webpack-plugin
        */
       new ScriptExtHtmlWebpackPlugin({
-        defaultAttribute: 'defer'
+        defaultAttribute: 'defer',
       }),
 
       /*
@@ -378,7 +381,7 @@ module.exports = function (options) {
        * Dependencies: HtmlWebpackPlugin
        */
       new HtmlElementsPlugin({
-        headTags: require('./head-config.common')
+        headTags: require('./head-config.common'),
       }),
 
       /**
@@ -422,8 +425,8 @@ module.exports = function (options) {
 
       new WebpackBuildNotifierPlugin({
         title: 'TAO WEB',
-        logo: 'public/dist/img/favicon.ico'
-      })
+        logo: 'public/dist/img/favicon.ico',
+      }),
     ],
 
     /*
@@ -438,8 +441,8 @@ module.exports = function (options) {
       process: true,
       module: false,
       clearImmediate: false,
-      setImmediate: false
-    }
+      setImmediate: false,
+    },
 
   };
 };

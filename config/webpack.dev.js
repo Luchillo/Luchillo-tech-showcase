@@ -12,7 +12,7 @@ const commonConfig = require('./webpack.common.js'); // the settings that are co
  */
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
+// const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
 /**
@@ -26,7 +26,7 @@ const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
   host: HOST,
   port: PORT,
   ENV: ENV,
-  HMR: HMR
+  HMR: HMR,
 });
 
 
@@ -37,7 +37,7 @@ const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = function (options) {
+module.exports = function(options) {
   return webpackMerge(commonConfig({env: ENV}), {
 
     /**
@@ -98,11 +98,11 @@ module.exports = function (options) {
            {
              loader: 'tslint-loader',
              options: {
-               configFile: 'tslint.json'
-             }
-           }
+               configFile: 'tslint.json',
+             },
+           },
          ],
-         exclude: [/\.(spec|e2e)\.ts$/]
+         exclude: [/\.(spec|e2e)\.ts$/],
        },
 
         /*
@@ -113,9 +113,9 @@ module.exports = function (options) {
         {
           test: /\.css$/,
           use: ['style-loader', 'css-loader'],
-          include: [helpers.root('src', 'styles')]
+          include: [helpers.root('src', 'styles')],
         },
-      ]
+      ],
 
     },
 
@@ -138,7 +138,7 @@ module.exports = function (options) {
           'ENV': JSON.stringify(METADATA.ENV),
           'NODE_ENV': JSON.stringify(METADATA.ENV),
           'HMR': METADATA.HMR,
-        }
+        },
       }),
 
       new DllBundlesPlugin({
@@ -147,11 +147,11 @@ module.exports = function (options) {
             'core-js',
             {
               name: 'zone.js',
-              path: 'zone.js/dist/zone.js'
+              path: 'zone.js/dist/zone.js',
             },
             {
               name: 'zone.js',
-              path: 'zone.js/dist/long-stack-trace-zone.js'
+              path: 'zone.js/dist/long-stack-trace-zone.js',
             },
           ],
           vendor: [
@@ -164,13 +164,13 @@ module.exports = function (options) {
             '@angular/router',
             '@angularclass/hmr',
             'rxjs',
-          ]
+          ],
         },
         dllDir: helpers.root('dll'),
         webpackConfig: webpackMergeDll(commonConfig({env: ENV}), {
           devtool: 'cheap-module-source-map',
-          plugins: []
-        })
+          plugins: [],
+        }),
       }),
 
       /**
@@ -183,7 +183,7 @@ module.exports = function (options) {
        */
       new AddAssetHtmlPlugin([
         { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('polyfills')}`) },
-        { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('vendor')}`) }
+        { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('vendor')}`) },
       ]),
 
       /**
@@ -225,8 +225,8 @@ module.exports = function (options) {
       historyApiFallback: true,
       watchOptions: {
         aggregateTimeout: 300,
-        poll: 1000
-      }
+        poll: 1000,
+      },
     },
 
     /*
@@ -241,8 +241,8 @@ module.exports = function (options) {
       process: true,
       module: false,
       clearImmediate: false,
-      setImmediate: false
-    }
+      setImmediate: false,
+    },
 
   });
-}
+};

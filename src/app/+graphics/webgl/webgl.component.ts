@@ -12,7 +12,7 @@ import { AppState } from '../../app.service';
   providers: [
   ],
   styleUrls: [ './webgl.style.scss' ],
-  templateUrl: './webgl.template.html'
+  templateUrl: './webgl.template.html',
 })
 export class WebGlComponent implements OnInit {
   @ViewChild('canvas') public canvasRef: ElementRef;
